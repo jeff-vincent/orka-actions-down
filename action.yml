@@ -10,11 +10,8 @@ runs:
       shell: bash
       env:
         INPUT_ORKAUSER: ${{ inputs.orkaUser }}
-        INPUT_ORKAIP: ${{ inputs.orkaIP }}
         INPUT_ORKAPASS: ${{ inputs.orkaPass }}
         INPUT_ORKABASEIMAGE: ${{ inputs.orkaBaseImage }}
-        INPUT_GITHUBUSER: ${{ inputs.githubUser }}
-        INPUT_GITHUBREPONAME: ${{ inputs.githubRepoName }}
         INPUT_GITHUBPAT: ${{ inputs.githubPat }}
         VPN_PASSWORD: ${{ inputs.vpnPassword }}
         VPN_USER: ${{ inputs.vpnUser }}
@@ -22,9 +19,6 @@ runs:
         VPN_SERVER_CERT: ${{ inputs.vpnServerCert }}
         VM_NAME: ${{ inputs.vmName }}
 inputs:
-  orkaIP:
-    description: "Your Orka IP"
-    required: true
   orkaUser:
     description: "Your Orka username"
     required: true
@@ -34,14 +28,8 @@ inputs:
   orkaBaseImage:
     description: "The Orka base image name"
     required: true
-  githubUser:
-    description: "Your GitHub username"
-    required: true
   githubPat:
     description: "Your GitHub personal access token"
-    required: true
-  githubRepoName:
-    description: "Name of your repo"
     required: true
   vpnPassword:
     description: "Your VPN password"
