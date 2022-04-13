@@ -18,6 +18,7 @@ class TearDownOrkaVM:
         self.github_user = repo_and_user_name[0]        
         self.gh_session = requests.Session()
         self.gh_session.auth = (self.github_user, self.github_pat)
+        self.github_org = os.environ["INPUT_GITHUB_ORG"]
 
     def get_orka_auth_token(self):
         data = {
@@ -46,7 +47,7 @@ class TearDownOrkaVM:
         requests.delete(url, headers=headers)
     
     def get_runner_id(self):
-        url = f"https://api.github.com/repos/{self.github_user}/{self.github_repo_name}/actions/runners"
+        url = f"https://api.github.com/orgs/{self.github_org}/actions/runners"
         result = self.gh_session.get(url)
         content = json.loads(result._content.decode('utf-8'))
         for item in content['runners']:
@@ -55,7 +56,7 @@ class TearDownOrkaVM:
 
     def remove_runner_from_gh(self):
         headers = {'Accept':'application/vnd.github.v3+json'}
-        url = f"https://api.github.com/repos/{self.github_user}/{self.github_repo_name}/actions/runners/{self.runner_id}"
+        url = f"https://api.github.com/orgs/{self.github_org}/actions/runners/{self.runner_id}"
         self.gh_session.delete(url,headers=headers)
 
 
