@@ -36,14 +36,6 @@ class TearDownOrkaVM:
             }
         data = {'orka_vm_name': self.vm_name}
         requests.delete(url, data=json.dumps(data), headers=headers)
-
-    def revoke_orka_auth_token(self):
-        url = f"{self.orka_address}/token"
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f"Bearer {self.token}"
-            }
-        requests.delete(url, headers=headers)
     
     def get_runner_id(self):
         url = f"https://api.github.com/repos/{self.github_user}/{self.github_repo_name}/actions/runners"
@@ -62,7 +54,6 @@ class TearDownOrkaVM:
 def main(tear_down):
     tear_down.get_orka_auth_token()
     tear_down.tear_down_vm()
-    tear_down.revoke_orka_auth_token()
     tear_down.get_runner_id()
     tear_down.remove_runner_from_gh()
 
